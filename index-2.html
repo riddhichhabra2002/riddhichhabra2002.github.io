@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Riddhi Chhabra — Marketer & Content Creator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #F7F4EF;
+      --ink: #1A1814;
+      --muted: #8A8680;
+      --accent: #C4A882;
+      --line: #E2DDD6;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 28px 60px;
+      background: var(--cream);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    nav.scrolled { border-color: var(--line); }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 100px;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 60px 80px 60px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 6vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.35s forwards;
+    }
+    .hero-name em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-bio {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 400px;
+      line-height: 1.75;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.5s forwards;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 4px;
+      transition: gap 0.3s, color 0.2s;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.65s forwards;
+      width: fit-content;
+    }
+    .hero-cta:hover { gap: 20px; color: var(--accent); border-color: var(--accent); }
+    .hero-cta svg { transition: transform 0.3s; }
+    .hero-cta:hover svg { transform: translateX(4px); }
+
+    .hero-right {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px;
+      overflow: hidden;
+    }
+
+    .hero-image-wrap {
+      position: relative;
+      width: 380px;
+      height: 480px;
+      opacity: 0;
+      animation: fadeIn 1s 0.4s forwards;
+    }
+
+    .hero-image-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -12px -12px 12px 12px;
+      border: 1px solid var(--accent);
+      opacity: 0.4;
+      border-radius: 2px;
+    }
+
+    .hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 2px;
+      filter: grayscale(15%);
+    }
+
+    /* Placeholder for image */
+    .hero-img-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(145deg, #e8e3da 0%, #d4cfc6 100%);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--muted);
+      font-style: italic;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── MARQUEE STRIP ── */
+    .marquee-wrap {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
+      padding: 14px 0;
+      background: var(--ink);
+    }
+    .marquee-track {
+      display: flex;
+      gap: 0;
+      animation: marquee 22s linear infinite;
+      white-space: nowrap;
+    }
+    .marquee-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 28px;
+      padding: 0 28px;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--cream);
+      opacity: 0.7;
+    }
+    .marquee-dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ── ABOUT STRIP ── */
+    .about-strip {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      padding: 100px 60px;
+      gap: 80px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .about-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding-top: 6px;
+    }
+
+    .about-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--ink);
+    }
+    .about-text em { font-style: italic; color: var(--muted); }
+
+    /* ── STATS ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      padding: 80px 60px;
+      border-bottom: 1px solid var(--line);
+      gap: 1px;
+      background: var(--line);
+    }
+    .stat-item {
+      background: var(--cream);
+      padding: 48px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 300;
+      line-height: 1;
+      color: var(--ink);
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── SKILLS SECTION ── */
+    .skills-section {
+      padding: 80px 60px;
+      border-bottom: 1px solid var(--line);
+    }
+    .skills-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 48px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      letter-spacing: -0.01em;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--line);
+    }
+    .skill-card {
+      background: var(--cream);
+      padding: 36px 28px;
+    }
+    .skill-card-title {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .skill-card-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .skill-card-items li {
+      font-size: 0.9rem;
+      color: var(--muted);
+      padding-left: 12px;
+      position: relative;
+    }
+    .skill-card-items li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--line);
+      font-size: 0.7rem;
+    }
+
+    /* ── FOOTER / CTA ── */
+    .footer-cta {
+      padding: 120px 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 32px;
+    }
+    .footer-cta-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .footer-cta-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      line-height: 1.15;
+      max-width: 600px;
+    }
+    .footer-cta-heading em { font-style: italic; color: var(--muted); }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      background: var(--ink);
+      color: var(--cream);
+      padding: 16px 36px;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 1px;
+      transition: background 0.2s, gap 0.3s;
+    }
+    .btn-primary:hover { background: var(--accent); gap: 18px; }
+
+    .footer-links {
+      display: flex;
+      gap: 32px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      width: 100%;
+      justify-content: center;
+    }
+    .footer-links a {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--ink); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .js-ready .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    .js-ready .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 24px 28px; }
+      .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 90px; }
+      .hero-right { display: none; }
+      .hero-left { padding: 60px 28px; }
+      .about-strip { grid-template-columns: 1fr; padding: 60px 28px; gap: 20px; }
+      .stats { grid-template-columns: 1fr 1fr; padding: 40px 28px; }
+      .skills-section { padding: 60px 28px; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .footer-cta { padding: 80px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">Riddhi Chhabra</a>
+    <ul class="nav-links">
+      <li><a href="https://riddhichhabra2002.wixsite.com/portfolio/projects" target="_blank">Projects</a></li>
+      <li><a href="https://riddhichhabra2002.wixsite.com/portfolio/resume" target="_blank">Resume</a></li>
+      <li><a href="/cdn-cgi/l/email-protection#f3819a97979b9a909b9b92918192c1c3c3c1b3949e929a9fdd909c9e">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Marketer · Creator · Generalist</p>
+      <h1 class="hero-name">
+        Riddhi<br/>
+        <em>Chhabra</em>
+      </h1>
+      <p class="hero-bio">
+        I'm Riddhi Chhabra, a marketer and generalist who loves to script, shoot, edit and direct. Through internships, jobs and courses in marketing, I've worked with a diverse set of brands across food & beverage, lifestyle, entertainment, skincare, retail and accessories. If there's one thing I know about myself, it's that I am someone you can count on to get it done!
+      </p>
+      <a href="https://riddhichhabra2002.wixsite.com/portfolio/projects" class="hero-cta" target="_blank">
+        View my work
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-image-wrap">
+        <!-- Replace src with your actual photo URL -->
+        <img
+          src="https://static.wixstatic.com/media/8b1f6c_dee2ab514b674ea99e9b33b811c10c34~mv2.jpg/v1/crop/x_0,y_504,w_3024,h_3024/fill/w_480,h_480,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_2206%202_JPG.jpg"
+          alt="Riddhi Chhabra"
+          class="hero-img"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        />
+        <div class="hero-img-placeholder" style="display:none;">Your photo here</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track" aria-hidden="true">
+      <!-- Two copies for seamless loop -->
+      <span class="marquee-item">Content Creation <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Social Media Strategy <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Short-Form Video <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Performance Marketing <span class="marquee-dot"></span></span>
+      <span class="marquee-item">YouTube <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Figma · Wix · Webflow <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Brand Storytelling <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Creative Direction <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Content Creation <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Social Media Strategy <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Short-Form Video <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Performance Marketing <span class="marquee-dot"></span></span>
+      <span class="marquee-item">YouTube <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Figma · Wix · Webflow <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Brand Storytelling <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Creative Direction <span class="marquee-dot"></span></span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about-strip reveal">
+    <div class="about-label">About</div>
+    <p class="about-text">
+      I'm Riddhi Chhabra, a marketer and generalist who loves to script, shoot, edit and direct. Through internships, jobs and courses in marketing, I've worked with a diverse set of brands across food & beverage, lifestyle, entertainment, skincare, retail and accessories. <em>If there's one thing I know about myself, it's that I am someone you can count on to get it done!</em>
+    </p>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats reveal">
+    <div class="stat-item">
+      <span class="stat-number">3+</span>
+      <span class="stat-label">Years of experience</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">10+</span>
+      <span class="stat-label">Brands worked with</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">2</span>
+      <span class="stat-label">Agencies · 1 YouTube channel</span>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="skills-section reveal">
+    <div class="skills-header">
+      <h2 class="section-title">What I do</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <p class="skill-card-title">Content</p>
+        <ul class="skill-card-items">
+          <li>Short-form video</li>
+          <li>Reels & TikTok</li>
+          <li>Scripting & ideation</li>
+          <li>Shoot & edit</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <p class="skill-card-title">Strategy</p>
+        <ul class="skill-card-items">
+          <li>Social media strategy</li>
+          <li>Brand storytelling</li>
+          <li>Moment marketing</li>
+          <li>YouTube growth</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <p class="skill-card-title">Marketing</p>
+        <ul class="skill-card-items">
+          <li>Meta Ads</li>
+          <li>Google Ads</li>
+          <li>Performance marketing</li>
+          <li>Analytics</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <p class="skill-card-title">Design & Build</p>
+        <ul class="skill-card-items">
+          <li>Figma (UI design)</li>
+          <li>Webflow</li>
+          <li>Wix</li>
+          <li>No-code tools</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER CTA -->
+  <section class="footer-cta reveal">
+    <p class="footer-cta-label">Let's work together</p>
+    <h2 class="footer-cta-heading">
+      Have a brand that needs
+      <em>a story told well?</em>
+    </h2>
+    <a href="https://riddhichhabra2002.wixsite.com/portfolio/projects" class="btn-primary" target="_blank">
+      See my projects
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+    <div class="footer-links">
+      <a href="/cdn-cgi/l/email-protection#bfcdd6dbdbd7d6dcd7d7deddcdde8d8f8f8dffd8d2ded6d391dcd0d2">Email</a>
+      <a href="https://www.linkedin.com/in/riddhi-chhabra-22227921a/" target="_blank">LinkedIn</a>
+      <a href="https://riddhichhabra2002.wixsite.com/portfolio/resume" target="_blank">Resume</a>
+    </div>
+  </section>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Scroll reveal — only activate after page load so sections are visible by default
+    window.addEventListener('load', () => {
+      document.body.classList.add('js-ready');
+      const reveals = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+    
