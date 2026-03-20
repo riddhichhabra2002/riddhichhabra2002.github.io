@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact — Riddhi Chhabra</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bricolage+Grotesque:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --pink: #FF2D78; --blue: #0066FF; --orange: #FF6B00;
+      --yellow: #FFE500; --black: #0A0A0A; --white: #FAFAF5;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--white); color: var(--black); font-family: 'Bricolage Grotesque', sans-serif; overflow-x: hidden; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 20px 48px; background: var(--white); border-bottom: 1px solid transparent; transition: border-color 0.3s; }
+    nav.scrolled { border-color: #ddd; }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.05em; color: var(--black); text-decoration: none; background: var(--yellow); padding: 4px 14px; }
+    .nav-links { display: flex; gap: 8px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--black); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 16px; border: 1.5px solid var(--black); transition: background 0.2s, color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { background: var(--black); color: var(--white); }
+
+    /* MAIN GRID */
+    .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; padding-top: 73px; }
+
+    /* LEFT */
+    .contact-left { background: var(--black); padding: 80px 64px; display: flex; flex-direction: column; justify-content: center; gap: 48px; border-right: 3px solid var(--black); }
+    .contact-heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 8vw, 8rem); line-height: 0.9; color: var(--white); }
+    .contact-heading span { color: var(--yellow); }
+    .contact-subtext { font-size: 1rem; color: #aaa; line-height: 1.8; max-width: 380px; }
+
+    .contact-details { display: flex; flex-direction: column; gap: 24px; }
+    .contact-detail-item { display: flex; flex-direction: column; gap: 4px; }
+    .contact-detail-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--pink); }
+    .contact-detail-value { font-size: 0.95rem; color: var(--white); }
+    .contact-detail-value a { color: var(--white); text-decoration: none; transition: color 0.2s; }
+    .contact-detail-value a:hover { color: var(--yellow); }
+
+    .social-links { display: flex; gap: 12px; }
+    .social-btn { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: var(--black); background: var(--yellow); padding: 10px 20px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; transition: background 0.2s, gap 0.2s; border: 2px solid var(--yellow); }
+    .social-btn:hover { background: var(--pink); border-color: var(--pink); color: var(--white); gap: 12px; }
+    .social-btn.outline { background: transparent; color: var(--white); border-color: #444; }
+    .social-btn.outline:hover { background: var(--pink); border-color: var(--pink); color: var(--white); }
+
+    /* RIGHT */
+    .contact-right { padding: 80px 64px; display: flex; flex-direction: column; justify-content: center; }
+    .form-label-top { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--pink); margin-bottom: 32px; }
+    .form-title { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; line-height: 1; margin-bottom: 40px; }
+
+    .contact-form { display: flex; flex-direction: column; gap: 20px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-group label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #888; }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%;
+      padding: 14px 16px;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 0.9rem;
+      color: var(--black);
+      background: var(--white);
+      border: 1.5px solid #ddd;
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--pink); }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .submit-btn { display: inline-flex; align-items: center; gap: 12px; background: var(--black); color: var(--white); padding: 18px 40px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border: none; cursor: pointer; transition: background 0.2s, gap 0.3s; width: fit-content; margin-top: 8px; }
+    .submit-btn:hover { background: var(--pink); gap: 20px; }
+
+    .success-msg { display: none; background: var(--yellow); border: 2px solid var(--black); padding: 16px 24px; font-size: 0.88rem; font-weight: 600; margin-top: 16px; }
+
+    /* FOOTER */
+    .site-footer { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid #ddd; background: var(--white); }
+    .footer-col { padding: 28px 48px; text-align: center; }
+    .footer-col-label { font-size: 0.82rem; font-weight: 700; color: var(--black); margin-bottom: 6px; }
+    .footer-col-value { font-size: 0.9rem; color: #444; }
+    .footer-col-link { font-size: 0.9rem; color: #444; text-decoration: underline; transition: color 0.2s; display: block; }
+    .footer-col-link:hover { color: var(--pink); }
+
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .contact-wrap { grid-template-columns: 1fr; }
+      .contact-left { padding: 60px 24px; }
+      .contact-right { padding: 60px 24px; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-col { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">RC</a>
+  <ul class="nav-links">
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="resume.html">Resume</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="contact-wrap">
+
+  <!-- LEFT -->
+  <div class="contact-left">
+    <div>
+      <h1 class="contact-heading">Let's<br/><span>Talk.</span></h1>
+      <p class="contact-subtext">Got a brief, a collab idea or just want to say hi? I'm always open to interesting work and good conversations.</p>
+    </div>
+
+    <div class="contact-details">
+      <div class="contact-detail-item">
+        <span class="contact-detail-label">Phone</span>
+        <span class="contact-detail-value">9456667007</span>
+      </div>
+      <div class="contact-detail-item">
+        <span class="contact-detail-label">Email</span>
+        <span class="contact-detail-value">riddhichhabra2002@gmail.com</span>
+      </div>
+
+    </div>
+
+    <div>
+      <p style="font-size:0.68rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#666;margin-bottom:14px;">Find me on</p>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/riddhi-chhabra-22227921a/" target="_blank" class="social-btn">LinkedIn ↗</a>
+        <a href="https://www.instagram.com/riddhichhabraa/" target="_blank" class="social-btn outline">Instagram ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="contact-right">
+    <p class="form-label-top">Send a message</p>
+    <h2 class="form-title">What's on your mind?</h2>
+
+    <form class="contact-form" action="https://formspree.io/f/mpqynpey" method="POST">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="Riya Sharma" required/>
+        </div>
+        <div class="form-group">
+          <label for="email">Your Email</label>
+          <input type="email" id="email" name="email" placeholder="riya@example.com" required/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="subject">What's this about?</label>
+        <select id="subject" name="subject">
+          <option value="">Select one</option>
+          <option value="freelance">Freelance project</option>
+          <option value="fulltime">Full-time opportunity</option>
+          <option value="collab">Collaboration</option>
+          <option value="other">Just saying hi</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Tell me about what you have in mind..." required></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">
+        Send it
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </form>
+
+    <div class="success-msg" id="successMsg">
+      ✓ Message sent! I'll get back to you soon.
+    </div>
+  </div>
+
+</div>
+
+
+
+<script>
+  window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',window.scrollY>20));
+
+  const form = document.querySelector('.contact-form');
+  const successMsg = document.getElementById('successMsg');
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const data = new FormData(form);
+    const response = await fetch('https://formspree.io/f/mpqynpey', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+    if (response.ok) {
+      form.reset();
+      successMsg.style.display = 'block';
+      setTimeout(() => successMsg.style.display = 'none', 5000);
+    }
+  });
+</script>
+</body>
+</html>

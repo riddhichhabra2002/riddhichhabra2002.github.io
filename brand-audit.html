@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Brand Audit — Nish Hair | Riddhi Chhabra</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bricolage+Grotesque:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --pink: #FF2D78; --yellow: #FFE500; --black: #0A0A0A; --white: #FAFAF5;
+      --ink: #1A1814; --muted: #6B6660; --line: #E2DDD6; --warm: #F5F0E8;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--white); color: var(--ink); font-family: 'Bricolage Grotesque', sans-serif; overflow-x: hidden; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 20px 48px; background: var(--white); border-bottom: 1px solid var(--line); }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.05em; color: var(--black); text-decoration: none; background: var(--yellow); padding: 4px 14px; }
+    .nav-back { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 8px; transition: color 0.2s; }
+    .nav-back:hover { color: var(--pink); }
+
+    /* HERO */
+    .audit-hero { padding: 140px 80px 80px; border-bottom: 1px solid var(--line); max-width: 1000px; margin: 0 auto; }
+    .audit-type { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pink); margin-bottom: 16px; }
+    .audit-brand { font-family: 'DM Serif Display', serif; font-size: clamp(3.5rem, 8vw, 7rem); line-height: 1; color: var(--ink); margin-bottom: 24px; }
+    .audit-tagline { font-family: 'DM Serif Display', serif; font-size: 1.4rem; font-style: italic; color: var(--muted); margin-bottom: 40px; line-height: 1.5; max-width: 600px; }
+
+    .audit-meta { display: flex; gap: 40px; padding-top: 40px; border-top: 1px solid var(--line); flex-wrap: wrap; }
+    .meta-item { display: flex; flex-direction: column; gap: 4px; }
+    .meta-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+    .meta-value { font-size: 0.9rem; font-weight: 600; color: var(--ink); }
+
+    /* BODY */
+    .audit-body { max-width: 1000px; margin: 0 auto; padding: 0 80px 100px; }
+
+    .audit-section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+    .audit-section:last-child { border-bottom: none; }
+
+    .section-num { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pink); margin-bottom: 8px; }
+    .section-title { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--ink); margin-bottom: 32px; line-height: 1.2; }
+
+    .audit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px; }
+    .audit-card { background: var(--warm); padding: 28px 24px; border-left: 3px solid var(--pink); }
+    .audit-card.good { border-left-color: #2E7D32; }
+    .audit-card.bad { border-left-color: var(--pink); }
+    .audit-card.idea { border-left-color: #0066FF; }
+    .audit-card-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+    .audit-card-text { font-size: 0.9rem; line-height: 1.75; color: #333; }
+
+    .audit-prose { font-size: 1rem; line-height: 1.9; color: #333; margin-bottom: 24px; }
+    .audit-prose strong { color: var(--ink); font-weight: 700; }
+
+    .highlight-box { background: var(--yellow); border: 2px solid var(--ink); padding: 28px 32px; margin: 32px 0; }
+    .highlight-box p { font-size: 1rem; line-height: 1.8; font-weight: 500; color: var(--ink); }
+
+    .verdict-box { background: var(--ink); padding: 48px; margin-top: 64px; }
+    .verdict-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--yellow); margin-bottom: 16px; }
+    .verdict-text { font-family: 'DM Serif Display', serif; font-size: 1.6rem; line-height: 1.5; color: var(--white); font-style: italic; }
+
+    /* FOOTER NAV */
+    .page-footer { border-top: 1px solid var(--line); padding: 40px 80px; display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: 0 auto; }
+    .footer-nav-link { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--muted); display: flex; align-items: center; gap: 8px; transition: color 0.2s; }
+    .footer-nav-link:hover { color: var(--pink); }
+
+    @media (max-width: 800px) {
+      nav { padding: 16px 24px; }
+      .audit-hero, .audit-body { padding-left: 24px; padding-right: 24px; }
+      .audit-grid { grid-template-columns: 1fr; }
+      .page-footer { padding: 32px 24px; flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">RC</a>
+  <a href="projects.html" class="nav-back">← Back to Projects</a>
+</nav>
+
+<!-- HERO -->
+<div class="audit-hero">
+  <p class="audit-type">Brand Audit</p>
+  <h1 class="audit-brand">Nish Hair</h1>
+  <p class="audit-tagline">"A product category most hadn't considered — here's how Nish Hair built an entire market around it, and what's working and what isn't."</p>
+  <div class="audit-meta">
+    <div class="meta-item">
+      <span class="meta-label">Brand</span>
+      <span class="meta-value">Nish Hair</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Founder</span>
+      <span class="meta-value">Parul Gulati</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Followers</span>
+      <span class="meta-value">900K on Instagram</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Category</span>
+      <span class="meta-value">Hair Care / Beauty</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Instagram</span>
+      <span class="meta-value"><a href="https://www.instagram.com/nishhair/" target="_blank" style="color:var(--pink);text-decoration:none;">@nishhair ↗</a></span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Audited by</span>
+      <span class="meta-value">Riddhi Chhabra</span>
+    </div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="audit-body">
+
+  <!-- SECTION 1 — OVERVIEW -->
+  <div class="audit-section">
+    <p class="section-num">01</p>
+    <h2 class="section-title">The Big Picture</h2>
+    <p class="audit-prose">Nish Hair is one of the most interesting case studies in Indian D2C beauty. It started with a product category — hair extensions and clip-ins — that most Indian consumers had never considered buying. And yet, it now sits at 900K followers with a deeply loyal community. That doesn't happen by accident.</p>
+    <p class="audit-prose">The secret isn't the product. The secret is <strong>Parul Gulati</strong> — actor, founder, and the brand's most powerful marketing asset. She turned what could have been a generic beauty brand into something that feels personal, real and worth following. That is genuinely hard to do, and she does it well.</p>
+    <div class="highlight-box">
+      <p>Nish Hair is a masterclass in founder-led branding. Parul's presence doesn't just build trust — it builds a community that would follow her into whatever she launches next.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 2 — WHAT'S WORKING -->
+  <div class="audit-section">
+    <p class="section-num">02</p>
+    <h2 class="section-title">What's Working</h2>
+    <div class="audit-grid">
+      <div class="audit-card good">
+        <p class="audit-card-title">Founder Branding</p>
+        <p class="audit-card-text">Parul being the face of the brand is its biggest strength. She talks to the camera like she's talking to a friend — it doesn't feel scripted. That authenticity is rare and incredibly hard to manufacture. Think Nishorama, Underneath, FZK Media, Mrucha Beauty — founder branding is the new marketing, and Nish Hair understands this better than most.</p>
+      </div>
+      <div class="audit-card good">
+        <p class="audit-card-title">Testimonials & Live Styling</p>
+        <p class="audit-card-text">Styling clients' hair on camera and posting real conversations is one of the smartest content moves. It's social proof in the most authentic format possible — you're not just showing the product, you're showing real people reacting to it in real time. This builds trust faster than any ad ever could.</p>
+      </div>
+      <div class="audit-card good">
+        <p class="audit-card-title">Challenge Content</p>
+        <p class="audit-card-text">The random challenge bucket is brilliant — Parul proving the product works in flights, swimming pools, on shoots. It answers every objection a customer might have while being genuinely entertaining to watch. "Parul, you have 1 minute to style this donut scrunchie" — fun to watch, engaging, time-bound. The viewer is hooked before they even realise they're watching a product video.</p>
+      </div>
+      <div class="audit-card good">
+        <p class="audit-card-title">Launch Strategy</p>
+        <p class="audit-card-text">Product launches aren't announcement posts — they're conversational reels. That's a major differentiator. Most brands post a static graphic with a launch date. Nish Hair makes it feel like Parul is personally telling you about something exciting. The conversion rate on that kind of content must be significantly higher.</p>
+      </div>
+      <div class="audit-card good">
+        <p class="audit-card-title">Viral Campaigns</p>
+        <p class="audit-card-text">The "Meri Marzi Ki Malkin Hoon" campaign — where users recreated reels using the song for a chance to be featured — was a brilliant virality play. It turned customers into creators, expanded reach organically and built emotional connection to the brand simultaneously.</p>
+      </div>
+      <div class="audit-card good">
+        <p class="audit-card-title">Big Brand Thinking</p>
+        <p class="audit-card-text">Nish Hair consistently thinks about its Purple Cow — what makes it impossible to ignore. The clarity of the brand identity means the audience always knows what they're getting, and that trust compounds over time.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 — WHAT COULD BE BETTER -->
+  <div class="audit-section">
+    <p class="section-num">03</p>
+    <h2 class="section-title">What Could Be Better</h2>
+    <div class="audit-grid">
+      <div class="audit-card bad">
+        <p class="audit-card-title">Audio Quality</p>
+        <p class="audit-card-text">A consistent issue across many videos is the absence of a mic — which makes content harder to follow. At nearly 1M followers, this is a basic production upgrade that would significantly improve the viewing experience and watch time.</p>
+      </div>
+      <div class="audit-card bad">
+        <p class="audit-card-title">Missing Captions</p>
+        <p class="audit-card-text">Captions should be non-negotiable in 2026. A large chunk of Instagram users watch reels on mute, especially in public. Missing captions means losing a significant portion of potential viewers. This is an easy fix with big impact.</p>
+      </div>
+      <div class="audit-card bad">
+        <p class="audit-card-title">Text & Visual Style on Reels</p>
+        <p class="audit-card-text">The text overlays on many reels feel inconsistent and could be more polished. A cleaner, more aesthetic text style across all content would elevate the overall look of the page and make it feel more premium — which is where the brand is clearly headed.</p>
+      </div>
+      <div class="audit-card bad">
+        <p class="audit-card-title">Non-Parul Content</p>
+        <p class="audit-card-text">Content featuring other influencers and employees exists but lacks the same energy. When Parul does it, it's magnetic. When others do it, it feels like a regular brand collaboration. The brand needs a clearer framework for how to make non-founder content feel as compelling.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 — MY TAKE -->
+  <div class="audit-section">
+    <p class="section-num">04</p>
+    <h2 class="section-title">My Take</h2>
+    <p class="audit-prose">Nish Hair is one of the best examples of a founder doing everything right on social media. The brand is built on trust, and trust is built on Parul showing up consistently, authentically and with genuine energy. That's not a strategy that can be easily copied — it's a personality, and it works.</p>
+    <p class="audit-prose">The gaps are mostly execution-level — audio, captions, text styles. These are fixable. The harder challenge, as the brand scales, will be <strong>how to maintain that intimate, friend-to-friend feeling when you're talking to a million people.</strong> That's the tension every founder-led brand eventually faces.</p>
+    <p class="audit-prose">If I were advising the brand, I'd focus on two things: systematise the non-Parul content so it has the same authenticity framework as her videos, and invest in cleaner production without losing the rawness that makes the content work.</p>
+
+    <div class="verdict-box">
+      <p class="verdict-label">Final Verdict</p>
+      <p class="verdict-text">"Nish Hair didn't just build a product — it built a person people trust. That's the hardest thing to do in marketing, and they're doing it exceptionally well."</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- PAGE FOOTER -->
+<div class="page-footer">
+  <a href="projects.html" class="footer-nav-link">← Back to Projects</a>
+  <a href="campaign-concept.html" class="footer-nav-link">Next: Campaign Concept — Zomato →</a>
+</div>
+
+</body>
+</html>

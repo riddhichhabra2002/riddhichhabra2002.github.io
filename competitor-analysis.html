@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Competitor Analysis — Quick Commerce | Riddhi Chhabra</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bricolage+Grotesque:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --pink: #FF2D78; --yellow: #FFE500; --blue: #0066FF;
+      --black: #0A0A0A; --white: #FAFAF5;
+      --ink: #1A1814; --muted: #6B6660; --line: #E2DDD6; --warm: #F5F0E8;
+      --zepto: #8B2FC9;
+      --blinkit: #F7C948;
+      --bigbasket: #84C225;
+      --instamart: #FC8019;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--white); color: var(--ink); font-family: 'Bricolage Grotesque', sans-serif; overflow-x: hidden; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 20px 48px; background: var(--white); border-bottom: 1px solid var(--line); }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--black); text-decoration: none; background: var(--yellow); padding: 4px 14px; }
+    .nav-back { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: var(--pink); }
+
+    /* HERO */
+    .hero { padding: 140px 80px 80px; border-bottom: 1px solid var(--line); max-width: 1100px; margin: 0 auto; }
+    .audit-type { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pink); margin-bottom: 16px; }
+    .hero-title { font-family: 'DM Serif Display', serif; font-size: clamp(3rem, 7vw, 6rem); line-height: 1; color: var(--ink); margin-bottom: 24px; }
+    .hero-tagline { font-family: 'DM Serif Display', serif; font-size: 1.4rem; font-style: italic; color: var(--muted); margin-bottom: 40px; line-height: 1.5; max-width: 600px; }
+    .hero-meta { display: flex; gap: 40px; padding-top: 40px; border-top: 1px solid var(--line); flex-wrap: wrap; }
+    .meta-item { display: flex; flex-direction: column; gap: 4px; }
+    .meta-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+    .meta-value { font-size: 0.9rem; font-weight: 600; color: var(--ink); }
+
+    /* SCORECARD */
+    .scorecard { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; background: var(--black); border: 3px solid var(--black); margin: 48px 0; }
+    .score-item { background: var(--white); padding: 28px 24px; display: flex; flex-direction: column; gap: 8px; }
+    .score-brand { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; line-height: 1; }
+    .score-followers { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .score-rating { display: flex; gap: 4px; margin-top: 4px; }
+    .score-dot { width: 10px; height: 10px; border-radius: 50%; background: #ddd; }
+    .score-dot.filled { background: var(--pink); }
+    .score-label { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* BODY */
+    .body { max-width: 1100px; margin: 0 auto; padding: 0 80px 100px; }
+    .section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+    .section:last-child { border-bottom: none; }
+    .section-num { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pink); margin-bottom: 8px; }
+    .section-title { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--ink); margin-bottom: 32px; }
+    .prose { font-size: 1rem; line-height: 1.9; color: #333; margin-bottom: 24px; }
+    .prose strong { color: var(--ink); font-weight: 700; }
+
+    /* BRAND DEEP DIVE */
+    .brand-section { margin-bottom: 48px; padding: 40px; border: 1.5px solid var(--line); position: relative; overflow: hidden; }
+    .brand-section::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; }
+    .brand-section.zepto::before { background: var(--zepto); }
+    .brand-section.blinkit::before { background: var(--blinkit); }
+    .brand-section.bigbasket::before { background: var(--bigbasket); }
+    .brand-section.instamart::before { background: var(--instamart); }
+
+    .brand-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; flex-wrap: wrap; gap: 16px; }
+    .brand-name { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; line-height: 1; }
+    .brand-name.zepto { color: var(--zepto); }
+    .brand-name.blinkit { color: #C9A000; }
+    .brand-name.bigbasket { color: var(--bigbasket); }
+    .brand-name.instamart { color: var(--instamart); }
+
+    .brand-tag { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 14px; border-radius: 100px; color: var(--white); }
+    .brand-tag.zepto { background: var(--zepto); }
+    .brand-tag.blinkit { background: #C9A000; color: var(--black); }
+    .brand-tag.bigbasket { background: var(--bigbasket); color: var(--black); }
+    .brand-tag.instamart { background: var(--instamart); }
+
+    .brand-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+    .brand-card { background: var(--warm); padding: 20px; }
+    .brand-card-title { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .brand-card-text { font-size: 0.88rem; line-height: 1.75; color: #333; }
+
+    .brand-verdict { background: var(--black); color: var(--white); padding: 20px 24px; margin-top: 20px; display: flex; align-items: center; gap: 16px; }
+    .brand-verdict-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--yellow); white-space: nowrap; }
+    .brand-verdict-text { font-size: 0.9rem; font-style: italic; font-family: 'DM Serif Display', serif; }
+
+    /* COMPARISON TABLE */
+    .compare-table { width: 100%; border-collapse: collapse; margin: 24px 0; }
+    .compare-table th { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 12px 16px; text-align: left; background: var(--black); color: var(--white); }
+    .compare-table td { font-size: 0.85rem; padding: 14px 16px; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.6; }
+    .compare-table tr:hover td { background: var(--warm); }
+    .tag-good { display: inline-block; background: #E8F5E9; color: #2E7D32; font-size: 0.65rem; font-weight: 700; padding: 2px 8px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .tag-bad { display: inline-block; background: #FFEBEE; color: #C62828; font-size: 0.65rem; font-weight: 700; padding: 2px 8px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .tag-mid { display: inline-block; background: #FFF8E1; color: #F57F17; font-size: 0.65rem; font-weight: 700; padding: 2px 8px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* WINNER */
+    .winner-box { background: var(--instamart); padding: 48px; margin: 32px 0; }
+    .winner-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 8px; }
+    .winner-name { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; color: var(--white); line-height: 1; margin-bottom: 12px; }
+    .winner-text { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: rgba(255,255,255,0.9); font-style: italic; line-height: 1.6; }
+
+    .highlight-box { background: var(--yellow); border: 2px solid var(--ink); padding: 28px 32px; margin: 32px 0; }
+    .highlight-box p { font-size: 1rem; line-height: 1.8; font-weight: 500; color: var(--ink); }
+
+    .verdict-box { background: var(--ink); padding: 48px; margin-top: 64px; }
+    .verdict-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--yellow); margin-bottom: 16px; }
+    .verdict-text { font-family: 'DM Serif Display', serif; font-size: 1.6rem; line-height: 1.5; color: var(--white); font-style: italic; }
+
+    .page-footer { border-top: 1px solid var(--line); padding: 40px 80px; display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: 0 auto; }
+    .footer-nav-link { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--muted); transition: color 0.2s; }
+    .footer-nav-link:hover { color: var(--pink); }
+
+    @media (max-width: 800px) {
+      nav { padding: 16px 24px; }
+      .hero, .body { padding-left: 24px; padding-right: 24px; }
+      .scorecard { grid-template-columns: 1fr 1fr; }
+      .brand-grid { grid-template-columns: 1fr; }
+      .page-footer { padding: 32px 24px; flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">RC</a>
+  <a href="projects.html" class="nav-back">← Back to Projects</a>
+</nav>
+
+<div class="hero">
+  <p class="audit-type">Competitor Analysis</p>
+  <h1 class="hero-title">Quick Commerce<br/>Content Wars</h1>
+  <p class="hero-tagline">"Four brands, one category — breaking down who's winning the content game and why."</p>
+  <div class="hero-meta">
+    <div class="meta-item"><span class="meta-label">Brands</span><span class="meta-value">Zepto, Blinkit, BigBasket, Swiggy Instamart</span></div>
+    <div class="meta-item"><span class="meta-label">Category</span><span class="meta-value">Quick Commerce</span></div>
+    <div class="meta-item"><span class="meta-label">Platform</span><span class="meta-value">Instagram</span></div>
+    <div class="meta-item"><span class="meta-label">By</span><span class="meta-value">Riddhi Chhabra</span></div>
+  </div>
+</div>
+
+<div class="body">
+
+  <!-- SCORECARD -->
+  <div class="section">
+    <p class="section-num">01</p>
+    <h2 class="section-title">At a Glance</h2>
+    <p class="prose">All four brands are fighting for the same customer — someone who wants groceries delivered in 10 minutes. But on social media, they're playing very different games. Here's the quick scorecard before we go deep.</p>
+
+    <div class="scorecard">
+      <div class="score-item">
+        <div class="brand-name zepto" style="font-size:1.8rem;">Zepto</div>
+        <div class="score-followers">717K followers</div>
+        <div class="score-label">Content Score</div>
+        <div class="score-rating">
+          <div class="score-dot filled"></div>
+          <div class="score-dot filled"></div>
+          <div class="score-dot filled"></div>
+          <div class="score-dot"></div>
+          <div class="score-dot"></div>
+        </div>
+      </div>
+      <div class="score-item">
+        <div class="brand-name blinkit" style="font-size:1.8rem;">Blinkit</div>
+        <div class="score-followers">1.2M followers</div>
+        <div class="score-label">Content Score</div>
+        <div class="score-rating">
+          <div class="score-dot filled"></div>
+          <div class="score-dot filled"></div>
+          <div class="score-dot filled"></div>
+          <div class="score-dot filled"></div>
+          <div class="score-dot"></div>
+        </div>
+      </div>
+      <div class="score-item">
+        <div class="brand-name bigbasket" style="font-size:1.8rem;">BigBasket</div>
+        <div class="score-followers">1.8M followers</div>
+        <div class="score-label">Content Score</div>
+        <div class="score-rating">
+          <div class="score-dot filled"></div>
+          <div class="score-dot filled"></div>
+          <div class="score-dot"></div>
+          <div class="score-dot"></div>
+          <div class="score-dot"></div>
+        </div>
+      </div>
+      <div class="score-item">
+        <div class="brand-name instamart" style="font-size:1.8rem;">Instamart</div>
+        <div class="score-followers">1M Followers</div>
+        <div class="score-label">Content Score</div>
+        <div class="score-rating">
+          <div class="score-dot filled"></div>
+          <div class="score-dot filled"></div>
+          <div class="score-dot filled"></div>
+          <div class="score-dot filled"></div>
+          <div class="score-dot filled"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEEP DIVES -->
+  <div class="section">
+    <p class="section-num">02</p>
+    <h2 class="section-title">Brand Deep Dives</h2>
+
+    <!-- ZEPTO -->
+    <div class="brand-section zepto">
+      <div class="brand-header">
+        <div class="brand-name zepto">Zepto</div>
+        <span class="brand-tag zepto">717K Followers</span>
+      </div>
+      <p class="prose">Zepto has the right ingredients — meme content, brand collabs with Pedigree, Swiss Beauty and India Gate Foods, relatable everyday content and trend-led reels. The ideas are there. The execution just isn't punchy enough. The content feels safe when it should feel bold.</p>
+      <div class="brand-grid">
+        <div class="brand-card">
+          <p class="brand-card-title">What's Working</p>
+          <p class="brand-card-text">Brand collaborations are smart and well-chosen. The relatable everyday content — like the ketchup bottle that won't open — taps into real frustrations. Influencer collabs are consistent. AI content videos are a good attempt at staying current.</p>
+        </div>
+        <div class="brand-card">
+          <p class="brand-card-title">What's Not Working</p>
+          <p class="brand-card-text">Despite 717K followers, engagement is low — which means the content isn't connecting deeply. It feels plain and predictable. The meme content lacks that extra wit that makes you stop and share. There's potential for so much more quirkiness that just isn't being tapped.</p>
+        </div>
+      </div>
+      <div class="brand-verdict">
+        <span class="brand-verdict-label">Verdict</span>
+        <span class="brand-verdict-text">"Good ideas, average execution. Zepto needs to take more creative risks — the brand has personality but the content doesn't show it yet."</span>
+      </div>
+    </div>
+
+    <!-- BLINKIT -->
+    <div class="brand-section blinkit">
+      <div class="brand-header">
+        <div class="brand-name blinkit">Blinkit</div>
+        <span class="brand-tag blinkit">1.2M Followers</span>
+      </div>
+      <p class="prose">Blinkit is currently the most strategically sharp brand in this space. Their content is funny, culturally aware and genuinely smart. The wrong Pythagoras theorem billboard campaign — "Bhulna mat, order almonds now" — is one of the best pieces of marketing in the quick commerce space. It's clever, it's shareable, and it shows a brand that genuinely understands internet culture.</p>
+      <div class="brand-grid">
+        <div class="brand-card">
+          <p class="brand-card-title">What's Working</p>
+          <p class="brand-card-text">Brain rot content done right — the fridge full of mangoes reel is exactly the kind of content that makes people tag friends. The billboard campaign showed real creative ambition. Influencer collabs feel more fun and authentic than competitors. Animated carousels are smart and visually distinct.</p>
+        </div>
+        <div class="brand-card">
+          <p class="brand-card-title">What's Not Working</p>
+          <p class="brand-card-text">AI content could be better — it still feels a bit generic compared to the rest of the feed. Trend-chasing sometimes feels slightly delayed. The bar Blinkit has set for itself is high, which means anything average stands out as a miss.</p>
+        </div>
+      </div>
+      <div class="brand-verdict">
+        <span class="brand-verdict-label">Verdict</span>
+        <span class="brand-verdict-text">"The most culturally switched-on brand in the category. When Blinkit gets it right, they really get it right."</span>
+      </div>
+    </div>
+
+    <!-- BIGBASKET -->
+    <div class="brand-section bigbasket">
+      <div class="brand-header">
+        <div class="brand-name bigbasket">BigBasket</div>
+        <span class="brand-tag bigbasket">1.8M Followers</span>
+      </div>
+      <p class="prose">BigBasket has the most followers of the four — and somehow the least engaging content. The 1.8M is legacy reach, not earned attention. Their static posts are visually weak, the brain rot content feels forced, and the overall page lacks a clear content identity. When a brand is trying too hard to be funny, you can feel it — and BigBasket's feed often has that energy.</p>
+      <div class="brand-grid">
+        <div class="brand-card">
+          <p class="brand-card-title">What's Working</p>
+          <p class="brand-card-text">Some reels have landed well — the "boy vs girl on Holi" content got good engagement. The RCB collaboration makes sense for their audience. When the humour is effortless, it works — the reel of a son "dying" after his mum puts mirchi in his Bournvita is genuinely funny — every Indian kid has been there.</p>
+        </div>
+        <div class="brand-card">
+          <p class="brand-card-title">What's Not Working</p>
+          <p class="brand-card-text">Static posts are boring and get terrible engagement. The brain rot content feels like it's trying to copy a trend without understanding why it works — the concealer-on-laptop reel is a good example of a concept that didn't land. They urgently need a better copywriter and a clearer content strategy.</p>
+        </div>
+      </div>
+      <div class="brand-verdict">
+        <span class="brand-verdict-label">Verdict</span>
+        <span class="brand-verdict-text">"1.8M followers, biggest missed opportunity in the category. The raw material is there — the execution needs a serious rethink."</span>
+      </div>
+    </div>
+
+    <!-- INSTAMART -->
+    <div class="brand-section instamart">
+      <div class="brand-header">
+        <div class="brand-name instamart">Swiggy Instamart</div>
+        <span class="brand-tag instamart">1M Followers</span>
+      </div>
+      <p class="prose">Swiggy Instamart is the most entertaining quick commerce account on Instagram — and it's not particularly close. Their content has a distinct voice, genuine humour and a willingness to be weird in a way that feels effortless. The behind-the-camera talking videos are chaotic and fun. The brain rot collabs feel natural, not forced. This is what happens when a brand fully commits to a content identity.</p>
+      <div class="brand-grid">
+        <div class="brand-card">
+          <p class="brand-card-title">What's Working</p>
+          <p class="brand-card-text">Everything. Unique ideas, funny brain rot collabs, behind-camera talking videos that feel genuinely unhinged in the best way, an engaging feed that rewards people for scrolling. The content feels like it's made by people who actually enjoy making it — and that energy is contagious.</p>
+        </div>
+        <div class="brand-card">
+          <p class="brand-card-title">What Could Be Better</p>
+          <p class="brand-card-text">The content is so personality-driven that it might be hard to scale. If the team or voice changes, the whole thing could unravel. Building more content formats that don't rely solely on one style would make the account more resilient.</p>
+        </div>
+      </div>
+      <div class="brand-verdict">
+        <span class="brand-verdict-label">Verdict</span>
+        <span class="brand-verdict-text">"The benchmark for fun, relatable brand content in India right now. Everyone else is playing catch-up."</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPARISON -->
+  <div class="section">
+    <p class="section-num">03</p>
+    <h2 class="section-title">Head to Head</h2>
+    <table class="compare-table">
+      <tr>
+        <th>Content Area</th>
+        <th>Zepto</th>
+        <th>Blinkit</th>
+        <th>BigBasket</th>
+        <th>Instamart</th>
+      </tr>
+      <tr>
+        <td><strong>Humour & Wit</strong></td>
+        <td><span class="tag-mid">Average</span></td>
+        <td><span class="tag-good">Strong</span></td>
+        <td><span class="tag-bad">Forced</span></td>
+        <td><span class="tag-good">Excellent</span></td>
+      </tr>
+      <tr>
+        <td><strong>Brand Collabs</strong></td>
+        <td><span class="tag-good">Good</span></td>
+        <td><span class="tag-good">Strong</span></td>
+        <td><span class="tag-mid">Average</span></td>
+        <td><span class="tag-good">Strong</span></td>
+      </tr>
+      <tr>
+        <td><strong>Trend Marketing</strong></td>
+        <td><span class="tag-good">Good</span></td>
+        <td><span class="tag-good">Good</span></td>
+        <td><span class="tag-mid">Average</span></td>
+        <td><span class="tag-good">Excellent</span></td>
+      </tr>
+      <tr>
+        <td><strong>Engagement Rate</strong></td>
+        <td><span class="tag-bad">Low</span></td>
+        <td><span class="tag-good">High</span></td>
+        <td><span class="tag-bad">Low</span></td>
+        <td><span class="tag-good">High</span></td>
+      </tr>
+      <tr>
+        <td><strong>Content Identity</strong></td>
+        <td><span class="tag-mid">Unclear</span></td>
+        <td><span class="tag-good">Strong</span></td>
+        <td><span class="tag-bad">Weak</span></td>
+        <td><span class="tag-good">Very Strong</span></td>
+      </tr>
+      <tr>
+        <td><strong>AI Content</strong></td>
+        <td><span class="tag-mid">Average</span></td>
+        <td><span class="tag-mid">Average</span></td>
+        <td><span class="tag-bad">Weak</span></td>
+        <td><span class="tag-good">Good</span></td>
+      </tr>
+      <tr>
+        <td><strong>Carousels</strong></td>
+        <td><span class="tag-good">Good</span></td>
+        <td><span class="tag-good">Strong</span></td>
+        <td><span class="tag-bad">Weak</span></td>
+        <td><span class="tag-good">Good</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- WINNER -->
+  <div class="section">
+    <p class="section-num">04</p>
+    <h2 class="section-title">Who's Winning?</h2>
+    <p class="prose">On followers alone, BigBasket wins. But followers are a vanity metric — engagement, cultural relevance and content quality tell the real story. And on those three metrics, the answer is clear.</p>
+
+    <div class="winner-box">
+      <p class="winner-label">Content Winner</p>
+      <div class="winner-name">Swiggy Instamart</div>
+      <p class="winner-text">"Most entertaining, most consistent, most effortless. When your content makes people look forward to seeing your posts, you've already won."</p>
+    </div>
+
+    <p class="prose">Blinkit is the runner-up — and in terms of strategic sharpness, they arguably have the edge. The Pythagoras theorem billboard campaign alone shows a brand thinking bigger than just Instagram posts. If Blinkit maintains this trajectory, they could easily claim the top spot.</p>
+    <p class="prose">Zepto has the potential but needs to take more risks. BigBasket needs a full content strategy rethink — the followers are there, the content just isn't doing them justice.</p>
+
+    <div class="highlight-box">
+      <p>The quick commerce war isn't just being fought on delivery speed anymore. It's being fought on social media, in comment sections and group chats. The brand with the most entertaining content wins mindshare — and mindshare wins orders.</p>
+    </div>
+
+    <div class="verdict-box">
+      <p class="verdict-label">Final Take</p>
+      <p class="verdict-text">"In a category where the product is almost identical, content is the differentiator. Instamart understands this better than anyone else."</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <a href="content-calendar.html" class="footer-nav-link">← Content Calendar: Fix My Curls</a>
+  <a href="projects.html" class="footer-nav-link">Back to all projects →</a>
+</div>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').style.borderBottomColor = window.scrollY > 20 ? '#E2DDD6' : 'transparent';
+  });
+</script>
+</body>
+</html>
