@@ -261,15 +261,15 @@
 
 </div>
 
-<!-- FOOTER -->
-<footer class="site-footer">
-  <div class="footer-col">
-    <p class="footer-col-label">Phone</p>
-    <p class="footer-col-value">9456667007</p>
-  </div>
-  <div class="footer-col">
-    <p class="footer-col-label">Email</p>
-    <p class="footer-col-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c3b1aaa7a7abaaa0ababa2a1b1a2f1f3f3f183a4aea2aaafeda0acae">[email&#160;protected]</a></p>
-  </div>
-  <div class="footer-col">
-    <p class="footer-col-label">Link
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',window.scrollY>20));
+  function filterProjects(cat,el){
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    el.classList.add('active');
+    document.querySelectorAll('.category-section').forEach(s=>{
+      s.style.display=(cat==='all'||s.getAttribute('data-category')===cat)?'block':'none';
+    });
+    // cat-spacer removed
+    // no
