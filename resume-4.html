@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resume — Riddhi Chhabra</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bricolage+Grotesque:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --pink: #FF2D78; --blue: #0066FF; --orange: #FF6B00;
+      --yellow: #FFE500; --black: #0A0A0A; --white: #FAFAF5;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--white); color: var(--black); font-family: 'Bricolage Grotesque', sans-serif; overflow-x: hidden; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 20px 48px; background: var(--white); border-bottom: 1px solid transparent; transition: border-color 0.3s; }
+    nav.scrolled { border-color: #ddd; }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.05em; color: var(--black); text-decoration: none; background: var(--yellow); padding: 4px 14px; }
+    .nav-links { display: flex; gap: 8px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--black); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 16px; border: 1.5px solid var(--black); transition: background 0.2s, color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { background: var(--black); color: var(--white); }
+
+    /* PAGE HEADER */
+    .page-header { padding: 140px 48px 80px; border-bottom: 3px solid var(--black); display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; background: var(--black); }
+    .page-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(5rem, 12vw, 11rem); line-height: 0.88; letter-spacing: -0.01em; color: var(--white); }
+    .page-title span { color: var(--yellow); }
+    .page-header-right { display: flex; flex-direction: column; gap: 16px; }
+    .page-subtitle { font-size: 1rem; color: #aaa; line-height: 1.8; max-width: 420px; }
+
+    /* MAIN LAYOUT */
+    .resume-body { display: grid; grid-template-columns: 2fr 1fr; border-bottom: 3px solid var(--black); }
+
+    /* LEFT - EXPERIENCE & EDUCATION */
+    .resume-left { padding: 64px 48px; border-right: 3px solid var(--black); }
+
+    .resume-section { margin-bottom: 64px; }
+    .resume-section:last-child { margin-bottom: 0; }
+
+    .section-label { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pink); margin-bottom: 32px; }
+
+    .timeline { display: flex; flex-direction: column; gap: 40px; }
+
+    .timeline-item { display: grid; grid-template-columns: 120px 1fr; gap: 24px; }
+    .timeline-date { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; color: #999; padding-top: 4px; line-height: 1.5; }
+    .timeline-content { border-left: 2px solid var(--yellow); padding-left: 24px; position: relative; }
+    .timeline-content::before { content: ''; position: absolute; left: -5px; top: 6px; width: 8px; height: 8px; background: var(--pink); border-radius: 50%; }
+
+    .job-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; line-height: 1; letter-spacing: 0.02em; margin-bottom: 4px; }
+    .job-company { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pink); margin-bottom: 10px; }
+    .job-desc { font-size: 0.88rem; line-height: 1.75; color: #444; }
+
+    .edu-degree { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; line-height: 1.1; margin-bottom: 4px; }
+    .edu-school { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pink); margin-bottom: 6px; }
+    .edu-score { font-size: 0.82rem; color: #666; }
+
+    /* RIGHT - SKILLS */
+    .resume-right { padding: 64px 40px; }
+
+    .skills-block { margin-bottom: 40px; }
+    .skills-block-title { font-size: 1rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pink); margin-bottom: 16px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+    .skills-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .skills-list li { font-size: 1rem; color: #444; padding-left: 14px; position: relative; line-height: 1.6; }
+    .skills-list li::before { content: '→'; position: absolute; left: 0; font-size: 0.7rem; color: var(--yellow); }
+
+    /* FOOTER */
+    .site-footer { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid #ddd; background: var(--white); }
+    .footer-col { padding: 28px 48px; text-align: center; }
+    .footer-col-label { font-size: 0.82rem; font-weight: 700; color: var(--black); margin-bottom: 6px; }
+    .footer-col-value { font-size: 0.9rem; color: #444; }
+    .footer-col-link { font-size: 0.9rem; color: #444; text-decoration: underline; transition: color 0.2s; display: block; }
+    .footer-col-link:hover { color: var(--pink); }
+
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .page-header { grid-template-columns: 1fr; padding: 120px 24px 60px; }
+      .resume-body { grid-template-columns: 1fr; }
+      .resume-left { padding: 48px 24px; border-right: none; border-bottom: 3px solid var(--black); }
+      .resume-right { padding: 48px 24px; }
+      .timeline-item { grid-template-columns: 90px 1fr; gap: 16px; }
+      .footer-col { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">RC</a>
+  <ul class="nav-links">
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="resume.html" class="active">Resume</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <h1 class="page-title">My<br/><span>Resume</span></h1>
+  <div class="page-header-right">
+    <p class="page-subtitle">Marketer, content creator and generalist with 3+ years of experience across agencies, freelance and internships.</p>
+  </div>
+</div>
+
+<!-- RESUME BODY -->
+<div class="resume-body">
+
+  <!-- LEFT -->
+  <div class="resume-left">
+
+    <!-- WORK EXPERIENCE -->
+    <div class="resume-section">
+      <p class="section-label">Work Experience</p>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-date">Jun 2025 – Present</div>
+          <div class="timeline-content">
+            <div class="job-title">Freelance Marketer & Content Creator</div>
+            <div class="job-company">Independent</div>
+            <p class="job-desc">Freelancing for multiple brands including Just Lil Things, Circle Store, Adorn Blinds & Shades, Buyhatke, Sashay Taproom & Kitchen, Chulha Chauki Da Dhaba and Aneri Thakkar. Work varies across content creation, strategy and social media execution — from end-to-end marketing to short-form video and campaigns.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">Jun 2024 – May 2025</div>
+          <div class="timeline-content">
+            <div class="job-title">Content Creator</div>
+            <div class="job-company">Think Tree Media House</div>
+            <p class="job-desc">Worked in a generalist content role across multiple brand accounts including Corner House, Meghana Foods, Loco Bear, Smart Commerce by Amazon and Think Tree Media House. Created day-to-day social media content from ideation to filming and editing.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">Sep 2023 – May 2024</div>
+          <div class="timeline-content">
+            <div class="job-title">Content Creator</div>
+            <div class="job-company">The Invisible Paintbrush</div>
+            <p class="job-desc">Produced content reels for brands including Kotak Cherry, FreshMenu, Welspun Flooring, Infinite Fertility and Bebetta, focusing on short-form digital content and brand storytelling.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">Dec 2023 – Feb 2024</div>
+          <div class="timeline-content">
+            <div class="job-title">Marketing Intern</div>
+            <div class="job-company">Naturepro</div>
+            <p class="job-desc">Worked as a visual content creator, producing vox-pop style videos and social media content to promote beauty and personal care products.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">May 2023 – Aug 2023</div>
+          <div class="timeline-content">
+            <div class="job-title">Editorial & Business Intern</div>
+            <div class="job-company">The Quint</div>
+            <p class="job-desc">Interned as an Editorial Content Management and Business & Sales Management Intern. Contributed to content curation and strategy while supporting business initiatives to enhance audience engagement and drive revenue growth. Also assisted in producing PTC videos and immersive media projects including the SOPA 2024 award-winning Hellhole.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- EDUCATION -->
+    <div class="resume-section">
+      <p class="section-label">Education</p>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-date">2025 – Present</div>
+          <div class="timeline-content">
+            <div class="edu-degree">Creator Marketer Program</div>
+            <div class="edu-school">The LIT School</div>
+            <p class="edu-score">Topped last 3 semesters · Content creation, performance marketing, no-code development, YouTube, Meta Ads, Google Ads</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">2021 – 2024</div>
+          <div class="timeline-content">
+            <div class="edu-degree">B.A. Journalism (Hons)</div>
+            <div class="edu-school">CHRIST (Deemed to be University), Bangalore</div>
+            <p class="edu-score">CGPA: 8.98 / 10</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">2019 – 2021</div>
+          <div class="timeline-content">
+            <div class="edu-degree">CBSE Grade 12</div>
+            <div class="edu-school">Pinewood School</div>
+            <p class="edu-score">Score: 96.5%</p>
+          </div>
+        </div>
+
+        
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RIGHT -->
+  <div class="resume-right">
+
+    <p class="section-label">Skills & Expertise</p>
+
+    <div class="skills-block">
+      <p class="skills-block-title">Content</p>
+      <ul class="skills-list">
+        <li>Short-form video</li>
+        <li>Reels scripting</li>
+        <li>Shoot & edit</li>
+        <li>Creative direction</li>
+        <li>Vox pop & interview format</li>
+      </ul>
+    </div>
+
+    <div class="skills-block">
+      <p class="skills-block-title">Strategy</p>
+      <ul class="skills-list">
+        <li>Social media strategy</li>
+        <li>Brand storytelling</li>
+        <li>Moment marketing</li>
+        <li>Content calendars</li>
+        <li>X & LinkedIn strategy</li>
+      </ul>
+    </div>
+
+    <div class="skills-block">
+      <p class="skills-block-title">Marketing</p>
+      <ul class="skills-list">
+        <li>Meta Ads</li>
+        <li>Google Ads</li>
+        <li>Instagram analytics</li>
+        <li>YouTube analytics</li>
+      </ul>
+    </div>
+
+    <div class="skills-block">
+      <p class="skills-block-title">Tools</p>
+      <ul class="skills-list">
+        <li>Adobe Premiere Pro</li>
+        <li>Figma, Wix & Webflow</li>
+        <li>Canva, Krea & Shorthand</li>
+        <li>Google & Meta Ads Manager</li>
+      </ul>
+    </div>
+
+    <div class="skills-block">
+      <p class="skills-block-title">Achievements</p>
+      <ul class="skills-list">
+        <li>Topped last 3 semesters at The LIT School</li>
+        <li>Won multiple inter-college reel making competitions</li>
+        <li>Part of SOPA 2024 award-winning project at The Quint</li>
+        <li>Led Namma Creator Carnival with 10+ creators</li>
+      </ul>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-col">
+    <p class="footer-col-label">Phone</p>
+    <p class="footer-col-value">9456667007</p>
+  </div>
+  <div class="footer-col">
+    <p class="footer-col-label">Email</p>
+    <p class="footer-col-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="27554e43434f4e444f4f46455546151
